@@ -1,0 +1,20 @@
+{
+  "catalog": "PostgreSQL_Prod",
+  "schema": "public",
+  "table": "orders",
+  "columns": [
+    {"name": "id", "dataType": 2, "dataTypeName": "INT", "length": 11, "nullable": false},
+    {"name": "user_id", "dataType": 2, "dataTypeName": "INT", "length": 11, "nullable": false},
+    {"name": "total", "dataType": 6, "dataTypeName": "DECIMAL", "length": 10, "nullable": false},
+    {"name": "status", "dataType": 1, "dataTypeName": "STRING", "length": 50, "nullable": false}
+  ],
+  "rows": [
+    [1001, 2, 150.00, "completed"],
+    [1002, 2, 89.99, "completed"],
+    [1003, 3, 299.50, "pending"],
+    [1004, 4, 45.00, "shipped"],
+    [1005, 5, 1250.00, "completed"],
+    [1006, 3, 67.80, "cancelled"],
+    [1007, 2, 199.99, "shipped"]
+  ]
+}

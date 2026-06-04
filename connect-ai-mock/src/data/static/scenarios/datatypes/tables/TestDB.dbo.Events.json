@@ -1,0 +1,115 @@
+{
+  "catalog": "TestDB",
+  "schema": "dbo",
+  "table": "Events",
+  "columns": [
+    {
+      "name": "event_id",
+      "dataType": 2,
+      "dataTypeName": "INT",
+      "length": 0,
+      "nullable": false
+    },
+    {
+      "name": "event_name",
+      "dataType": 1,
+      "dataTypeName": "STRING",
+      "length": 100,
+      "nullable": false
+    },
+    {
+      "name": "event_date",
+      "dataType": 4,
+      "dataTypeName": "DATE",
+      "length": 0,
+      "nullable": true
+    },
+    {
+      "name": "start_time",
+      "dataType": 4,
+      "dataTypeName": "TIME",
+      "length": 0,
+      "nullable": true
+    },
+    {
+      "name": "created_at",
+      "dataType": 4,
+      "dataTypeName": "DATETIME",
+      "length": 0,
+      "nullable": true
+    },
+    {
+      "name": "updated_at",
+      "dataType": 4,
+      "dataTypeName": "TIMESTAMP",
+      "length": 0,
+      "nullable": true
+    },
+    {
+      "name": "year_only",
+      "dataType": 2,
+      "dataTypeName": "YEAR",
+      "length": 0,
+      "nullable": true
+    },
+    {
+      "name": "duration_interval",
+      "dataType": 1,
+      "dataTypeName": "INTERVAL",
+      "length": 0,
+      "nullable": true
+    }
+  ],
+  "rows": [
+    [
+      1,
+      "Conference 2024",
+      "2024-06-15",
+      "09:00:00",
+      "2024-01-15T10:30:00",
+      "2024-01-15T10:30:00.123456",
+      2024,
+      "P1D"
+    ],
+    [
+      2,
+      "Workshop",
+      "2024-12-31",
+      "23:59:59",
+      "2024-12-31T23:59:59",
+      "2024-12-31T23:59:59.999999",
+      2024,
+      "PT2H30M"
+    ],
+    [
+      3,
+      "Webinar",
+      "2025-01-01",
+      "00:00:00",
+      "2025-01-01T00:00:00",
+      "2025-01-01T00:00:00.000000",
+      2025,
+      "PT45M"
+    ],
+    [
+      4,
+      "Historic Event",
+      "1999-12-31",
+      "12:00:00",
+      "1999-12-31T12:00:00",
+      "1999-12-31T12:00:00.000000",
+      1999,
+      "P30D"
+    ],
+    [
+      5,
+      "Null Event",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  ]
+}

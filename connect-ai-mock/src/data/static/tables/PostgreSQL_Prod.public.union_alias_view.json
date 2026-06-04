@@ -1,0 +1,14 @@
+{
+  "catalog": "PostgreSQL_Prod",
+  "schema": "public",
+  "table": "union_alias_view",
+  "columns": [
+    {"name": "Id", "label": "OrderId", "dataType": 2, "dataTypeName": "INT", "length": 11, "nullable": false},
+    {"name": "Id", "label": "InvoiceId", "dataType": 2, "dataTypeName": "INT", "length": 11, "nullable": false}
+  ],
+  "rows": [
+    [101, 501],
+    [102, 502],
+    [103, 503]
+  ]
+}

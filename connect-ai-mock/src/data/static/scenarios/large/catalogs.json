@@ -1,0 +1,7 @@
+[
+  {"name": "Salesforce1", "description": "Salesforce CRM connection"},
+  {"name": "PostgreSQL_Prod", "description": "Production PostgreSQL database"},
+  {"name": "MySQL_Analytics", "description": "Analytics MySQL database"},
+  {"name": "MongoDB_Logs", "description": "MongoDB logs database"},
+  {"name": "BigQuery_DW", "description": "BigQuery data warehouse"}
+]

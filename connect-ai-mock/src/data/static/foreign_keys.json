@@ -1,0 +1,14 @@
+{
+  "foreign_keys": [
+    {
+      "pkCatalog": "Salesforce1", "pkSchema": "Salesforce", "pkTable": "Account", "pkColumn": "Id",
+      "fkCatalog": "Salesforce1", "fkSchema": "Salesforce", "fkTable": "Contact", "fkColumn": "AccountId",
+      "keySeq": 1, "fkName": "FK_Contact_Account", "pkName": "PK_Account"
+    },
+    {
+      "pkCatalog": "PostgreSQL_Prod", "pkSchema": "public", "pkTable": "users", "pkColumn": "id",
+      "fkCatalog": "PostgreSQL_Prod", "fkSchema": "public", "fkTable": "orders", "fkColumn": "user_id",
+      "keySeq": 1, "fkName": "fk_orders_user", "pkName": "users_pkey"
+    }
+  ]
+}

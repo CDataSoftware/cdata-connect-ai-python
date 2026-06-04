@@ -1,0 +1,17 @@
+{
+  "catalog": "PostgreSQL2",
+  "schema": "public",
+  "table": "dbapi20test_barflys",
+  "columns": [
+    {
+      "name": "name",
+      "dataType": 5,
+      "dataTypeName": "VARCHAR",
+      "length": 20,
+      "precision": 0,
+      "scale": 0,
+      "nullable": true
+    }
+  ],
+  "rows": []
+}

@@ -1,0 +1,9 @@
+{
+  "primary_keys": [
+    {"catalog": "Salesforce1", "schema": "Salesforce", "table": "Contact", "column": "Id", "keySeq": 1, "pkName": "PK_Contact"},
+    {"catalog": "Salesforce1", "schema": "Salesforce", "table": "Account", "column": "Id", "keySeq": 1, "pkName": "PK_Account"},
+    {"catalog": "Salesforce1", "schema": "Salesforce", "table": "Lead", "column": "Id", "keySeq": 1, "pkName": "PK_Lead"},
+    {"catalog": "PostgreSQL_Prod", "schema": "public", "table": "users", "column": "id", "keySeq": 1, "pkName": "users_pkey"},
+    {"catalog": "PostgreSQL_Prod", "schema": "public", "table": "orders", "column": "id", "keySeq": 1, "pkName": "orders_pkey"}
+  ]
+}

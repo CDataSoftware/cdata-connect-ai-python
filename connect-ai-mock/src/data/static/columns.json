@@ -1,0 +1,27 @@
+{
+  "columns": [
+    {"catalog": "Salesforce1", "schema": "Salesforce", "table": "Contact", "name": "Id", "dataType": 1, "typeName": "STRING", "size": 18, "nullable": false, "ordinal": 1},
+    {"catalog": "Salesforce1", "schema": "Salesforce", "table": "Contact", "name": "FirstName", "dataType": 1, "typeName": "STRING", "size": 255, "nullable": true, "ordinal": 2},
+    {"catalog": "Salesforce1", "schema": "Salesforce", "table": "Contact", "name": "LastName", "dataType": 1, "typeName": "STRING", "size": 255, "nullable": false, "ordinal": 3},
+    {"catalog": "Salesforce1", "schema": "Salesforce", "table": "Contact", "name": "Email", "dataType": 1, "typeName": "STRING", "size": 255, "nullable": true, "ordinal": 4},
+    {"catalog": "Salesforce1", "schema": "Salesforce", "table": "Contact", "name": "Phone", "dataType": 1, "typeName": "STRING", "size": 40, "nullable": true, "ordinal": 5},
+    {"catalog": "Salesforce1", "schema": "Salesforce", "table": "Contact", "name": "AccountId", "dataType": 1, "typeName": "STRING", "size": 18, "nullable": true, "ordinal": 6},
+    {"catalog": "Salesforce1", "schema": "Salesforce", "table": "Contact", "name": "CreatedDate", "dataType": 4, "typeName": "DATETIME", "size": 0, "nullable": false, "ordinal": 7},
+
+    {"catalog": "Salesforce1", "schema": "Salesforce", "table": "Account", "name": "Id", "dataType": 1, "typeName": "STRING", "size": 18, "nullable": false, "ordinal": 1},
+    {"catalog": "Salesforce1", "schema": "Salesforce", "table": "Account", "name": "Name", "dataType": 1, "typeName": "STRING", "size": 255, "nullable": false, "ordinal": 2},
+    {"catalog": "Salesforce1", "schema": "Salesforce", "table": "Account", "name": "Industry", "dataType": 1, "typeName": "STRING", "size": 100, "nullable": true, "ordinal": 3},
+    {"catalog": "Salesforce1", "schema": "Salesforce", "table": "Account", "name": "Website", "dataType": 1, "typeName": "STRING", "size": 255, "nullable": true, "ordinal": 4},
+    {"catalog": "Salesforce1", "schema": "Salesforce", "table": "Account", "name": "AnnualRevenue", "dataType": 6, "typeName": "DECIMAL", "size": 18, "nullable": true, "ordinal": 5},
+
+    {"catalog": "PostgreSQL_Prod", "schema": "public", "table": "users", "name": "id", "dataType": 2, "typeName": "INT", "size": 11, "nullable": false, "ordinal": 1},
+    {"catalog": "PostgreSQL_Prod", "schema": "public", "table": "users", "name": "email", "dataType": 1, "typeName": "STRING", "size": 255, "nullable": false, "ordinal": 2},
+    {"catalog": "PostgreSQL_Prod", "schema": "public", "table": "users", "name": "name", "dataType": 1, "typeName": "STRING", "size": 255, "nullable": true, "ordinal": 3},
+    {"catalog": "PostgreSQL_Prod", "schema": "public", "table": "users", "name": "created_at", "dataType": 4, "typeName": "DATETIME", "size": 0, "nullable": false, "ordinal": 4},
+
+    {"catalog": "PostgreSQL_Prod", "schema": "public", "table": "orders", "name": "id", "dataType": 2, "typeName": "INT", "size": 11, "nullable": false, "ordinal": 1},
+    {"catalog": "PostgreSQL_Prod", "schema": "public", "table": "orders", "name": "user_id", "dataType": 2, "typeName": "INT", "size": 11, "nullable": false, "ordinal": 2},
+    {"catalog": "PostgreSQL_Prod", "schema": "public", "table": "orders", "name": "total", "dataType": 6, "typeName": "DECIMAL", "size": 10, "nullable": false, "ordinal": 3},
+    {"catalog": "PostgreSQL_Prod", "schema": "public", "table": "orders", "name": "status", "dataType": 1, "typeName": "STRING", "size": 50, "nullable": false, "ordinal": 4}
+  ]
+}

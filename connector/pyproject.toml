@@ -1,0 +1,85 @@
+[build-system]
+requires = ["setuptools==82.0.1", "setuptools-scm==9.2.2", "wheel==0.46.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cdata-connect-ai"
+dynamic = ["version"]
+description = "PEP 249-compliant Python connector for CData Connect AI — live SQL access to 350+ enterprise data sources"
+readme = { file = "README.md", content-type = "text/markdown" }
+license = "MIT"
+authors = [
+    { name = "CData Software, Inc.", email = "support@cdata.com" }
+]
+keywords = ["cdata", "connect-ai", "database", "sql", "pep249", "dbapi2", "connector", "etl", "data-integration"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Topic :: Database :: Front-Ends",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+requires-python = ">=3.10"
+dependencies = [
+    "requests~=2.32",
+    "ijson~=3.5",
+    "pyhocon~=0.3.61",
+]
+
+[project.optional-dependencies]
+full = ["pandas~=3.0"]
+dev = ["pytest==9.0.1", "pytest-mock==3.15.1", "requests==2.32.5"]
+
+[project.urls]
+Homepage = "https://www.cdata.com/ai/analytics/"
+
+[tool.setuptools.packages.find]
+exclude = ["tests*", "test*", "dist*", "build*"]
+
+[tool.setuptools_scm]
+# Derives version from git tags (e.g. v1.0.0 → 1.0.0).
+# search_parent_directories is required because connector/ is a subdirectory
+# of the git repo root — the .git dir lives one level up.
+# Writes a _version.py at build time so the version is available at runtime
+# even when the .git directory is absent (e.g. inside an installed wheel).
+search_parent_directories = true
+write_to = "cdata_connect_ai/_version.py"
+fallback_version = "0.0.0.dev0"
+local_scheme = "no-local-version"
+
+[tool.setuptools.package-data]
+"cdata_connect_ai" = ["LICENSE"]
+
+[tool.pytest.ini_options]
+addopts = ["--verbose", "--ignore=build/private"]
+testpaths = ["tests"]
+markers = [
+    "unit: Pure unit tests — no server, no network",
+    "integration: Integration tests — require mock or live server",
+    "slow_integration: Slow integration tests (delay/timeout/streaming) — pass --skip-slow to exclude",
+    "live_api: Tests requiring a live stateful API (INSERT+SELECT round-trip)",
+]
+
+[tool.coverage.run]
+branch = true
+parallel = true
+source = ["cdata_connect_ai"]
+
+[tool.coverage.paths]
+source = [
+    "cdata_connect_ai",
+    "build/lib/*/site-packages/cdata_connect_ai",
+]
+
+[tool.coverage.html]
+directory = "build/coverage"
+
+[tool.coverage.xml]
+output = "build/coverage/coverage.xml"

@@ -1,0 +1,116 @@
+{
+  "catalog": "TestDB",
+  "schema": "dbo",
+  "table": "Documents",
+  "columns": [
+    {
+      "name": "doc_id",
+      "dataType": 2,
+      "dataTypeName": "INT",
+      "length": 0,
+      "nullable": false
+    },
+    {
+      "name": "title",
+      "dataType": 1,
+      "dataTypeName": "VARCHAR",
+      "length": 255,
+      "nullable": false
+    },
+    {
+      "name": "char_code",
+      "dataType": 1,
+      "dataTypeName": "CHAR",
+      "length": 10,
+      "nullable": true
+    },
+    {
+      "name": "description",
+      "dataType": 1,
+      "dataTypeName": "TEXT",
+      "length": 0,
+      "nullable": true
+    },
+    {
+      "name": "content_clob",
+      "dataType": 1,
+      "dataTypeName": "CLOB",
+      "length": 0,
+      "nullable": true
+    },
+    {
+      "name": "guid",
+      "dataType": 1,
+      "dataTypeName": "UUID",
+      "length": 36,
+      "nullable": true
+    },
+    {
+      "name": "binary_data",
+      "dataType": 6,
+      "dataTypeName": "BINARY",
+      "length": 100,
+      "nullable": true
+    },
+    {
+      "name": "blob_data",
+      "dataType": 6,
+      "dataTypeName": "BLOB",
+      "length": 0,
+      "nullable": true
+    },
+    {
+      "name": "varbinary_data",
+      "dataType": 6,
+      "dataTypeName": "VARBINARY",
+      "length": 1000,
+      "nullable": true
+    }
+  ],
+  "rows": [
+    [
+      1,
+      "Report Q1",
+      "RPT001    ",
+      "Quarterly financial report",
+      "Long text content here...",
+      "550e8400-e29b-41d4-a716-446655440000",
+      "YmluYXJ5IGRhdGE=",
+      "YmxvYiBjb250ZW50IGhlcmU=",
+      "AAEC//4="
+    ],
+    [
+      2,
+      "Manual",
+      "MNL002    ",
+      "User manual with special chars: <>&\"'",
+      "Content with unicode: \u4f60\u597d\u4e16\u754c \ud83c\udf89",
+      "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+      "AAAAAAAAAAAAAA==",
+      "/////////////w==",
+      "dGVzdA=="
+    ],
+    [
+      3,
+      "Empty Doc",
+      "          ",
+      "",
+      "",
+      "00000000-0000-0000-0000-000000000000",
+      "",
+      "",
+      ""
+    ],
+    [
+      4,
+      "Null Doc",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  ]
+}

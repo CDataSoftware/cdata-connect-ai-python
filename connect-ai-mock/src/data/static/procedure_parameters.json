@@ -1,0 +1,11 @@
+{
+  "procedure_parameters": [
+    {"catalog": "Salesforce1", "schema": "Salesforce", "procedure": "GetContactsByAccount", "name": "AccountId", "columnType": 1, "dataType": 1, "typeName": "STRING"},
+    {"catalog": "Salesforce1", "schema": "Salesforce", "procedure": "GetContactsByAccount", "name": "Limit", "columnType": 1, "dataType": 2, "typeName": "INT"},
+    {"catalog": "Salesforce1", "schema": "Salesforce", "procedure": "CreateLead", "name": "FirstName", "columnType": 1, "dataType": 1, "typeName": "STRING"},
+    {"catalog": "Salesforce1", "schema": "Salesforce", "procedure": "CreateLead", "name": "LastName", "columnType": 1, "dataType": 1, "typeName": "STRING"},
+    {"catalog": "Salesforce1", "schema": "Salesforce", "procedure": "CreateLead", "name": "Email", "columnType": 1, "dataType": 1, "typeName": "STRING"},
+    {"catalog": "PostgreSQL_Prod", "schema": "public", "procedure": "get_user_orders", "name": "user_id", "columnType": 1, "dataType": 2, "typeName": "INT"},
+    {"catalog": "PostgreSQL2", "schema": "public", "procedure": "lowercase_input", "name": "@1", "columnType": 1, "dataType": 1, "typeName": "VARCHAR"}
+  ]
+}

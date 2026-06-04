@@ -1,0 +1,15 @@
+{
+  "tables": [
+    {"catalog": "Salesforce1", "schema": "Salesforce", "name": "Account", "type": "TABLE", "remarks": "Salesforce Account object"},
+    {"catalog": "Salesforce1", "schema": "Salesforce", "name": "Contact", "type": "TABLE", "remarks": "Salesforce Contact object"},
+    {"catalog": "Salesforce1", "schema": "Salesforce", "name": "Lead", "type": "TABLE", "remarks": "Salesforce Lead object"},
+    {"catalog": "Salesforce1", "schema": "Salesforce", "name": "Opportunity", "type": "TABLE", "remarks": "Salesforce Opportunity object"},
+    {"catalog": "PostgreSQL_Prod", "schema": "public", "name": "users", "type": "TABLE", "remarks": "Application users"},
+    {"catalog": "PostgreSQL_Prod", "schema": "public", "name": "orders", "type": "TABLE", "remarks": "Customer orders"},
+    {"catalog": "PostgreSQL_Prod", "schema": "public", "name": "products", "type": "TABLE", "remarks": "Product catalog"},
+    {"catalog": "MySQL_Analytics", "schema": "analytics", "name": "page_views", "type": "TABLE", "remarks": "Website page views"},
+    {"catalog": "MySQL_Analytics", "schema": "analytics", "name": "events", "type": "TABLE", "remarks": "User events"},
+    {"catalog": "PostgreSQL2", "schema": "public", "name": "dbapi20test_booze", "type": "TABLE", "remarks": "DB API 2.0 test table"},
+    {"catalog": "PostgreSQL2", "schema": "public", "name": "dbapi20test_barflys", "type": "TABLE", "remarks": "DB API 2.0 test table"}
+  ]
+}

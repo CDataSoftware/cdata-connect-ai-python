@@ -1,0 +1,4 @@
+# Default owners — Connect AI Engineering and Platform review all changes.
+# Requires `require_code_owner_reviews=true` on the main branch protection
+# rule to take effect.
+* @CDataSoftware/connect-ai-engineering @CDataSoftware/platform

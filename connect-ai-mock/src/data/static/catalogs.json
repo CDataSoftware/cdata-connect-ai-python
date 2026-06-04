@@ -1,0 +1,8 @@
+{
+  "catalogs": [
+    {"name": "Salesforce1", "description": "Salesforce CRM"},
+    {"name": "PostgreSQL_Prod", "description": "Production PostgreSQL Database"},
+    {"name": "MySQL_Analytics", "description": "Analytics MySQL Database"},
+    {"name": "PostgreSQL2", "description": "PostgreSQL2 test data source"}
+  ]
+}

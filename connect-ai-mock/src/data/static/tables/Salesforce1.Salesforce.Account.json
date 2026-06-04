@@ -1,0 +1,22 @@
+{
+  "catalog": "Salesforce1",
+  "schema": "Salesforce",
+  "table": "Account",
+  "columns": [
+    {"name": "Id", "dataType": 1, "dataTypeName": "STRING", "length": 18, "nullable": false},
+    {"name": "Name", "dataType": 1, "dataTypeName": "STRING", "length": 255, "nullable": false},
+    {"name": "Industry", "dataType": 1, "dataTypeName": "STRING", "length": 100, "nullable": true},
+    {"name": "Website", "dataType": 1, "dataTypeName": "STRING", "length": 255, "nullable": true},
+    {"name": "AnnualRevenue", "dataType": 6, "dataTypeName": "DECIMAL", "length": 18, "nullable": true}
+  ],
+  "rows": [
+    ["001xx000003GYf5AAG", "Acme Corporation", "Technology", "https://acme.com", 50000000],
+    ["001xx000003GYf6AAG", "Global Industries", "Manufacturing", "https://global-ind.com", 120000000],
+    ["001xx000003GYf7AAG", "TechCorp Solutions", "Technology", "https://techcorp.io", 25000000],
+    ["001xx000003GYf8AAG", "StartUp Innovations", "Technology", "https://startup.io", 5000000],
+    ["001xx000003GYf9AAG", "Media Group Inc", "Media", "https://mediagroup.com", 75000000],
+    ["001xx000003GYfAAAG", "Nature Foundation", "Non-Profit", "https://nature.org", 10000000],
+    ["001xx000003GYfBAAG", "BigCo Enterprises", "Finance", "https://bigco.com", 500000000],
+    ["001xx000003GYfCAAG", "Design Studio", "Professional Services", "https://design.io", 8000000]
+  ]
+}

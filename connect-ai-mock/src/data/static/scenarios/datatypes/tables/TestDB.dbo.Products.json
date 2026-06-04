@@ -1,0 +1,140 @@
+{
+  "catalog": "TestDB",
+  "schema": "dbo",
+  "table": "Products",
+  "columns": [
+    {
+      "name": "product_id",
+      "dataType": 2,
+      "dataTypeName": "INT",
+      "length": 0,
+      "nullable": false
+    },
+    {
+      "name": "sku",
+      "dataType": 1,
+      "dataTypeName": "STRING",
+      "length": 50,
+      "nullable": false
+    },
+    {
+      "name": "quantity",
+      "dataType": 2,
+      "dataTypeName": "INT",
+      "length": 0,
+      "nullable": true
+    },
+    {
+      "name": "quantity_bigint",
+      "dataType": 2,
+      "dataTypeName": "BIGINT",
+      "length": 0,
+      "nullable": true
+    },
+    {
+      "name": "price",
+      "dataType": 3,
+      "dataTypeName": "DECIMAL",
+      "precision": 10,
+      "scale": 2,
+      "nullable": true
+    },
+    {
+      "name": "weight_float",
+      "dataType": 3,
+      "dataTypeName": "FLOAT",
+      "length": 0,
+      "nullable": true
+    },
+    {
+      "name": "rating_double",
+      "dataType": 3,
+      "dataTypeName": "DOUBLE",
+      "length": 0,
+      "nullable": true
+    },
+    {
+      "name": "is_active",
+      "dataType": 5,
+      "dataTypeName": "BOOLEAN",
+      "length": 0,
+      "nullable": true
+    },
+    {
+      "name": "smallint_val",
+      "dataType": 2,
+      "dataTypeName": "SMALLINT",
+      "length": 0,
+      "nullable": true
+    },
+    {
+      "name": "tinyint_val",
+      "dataType": 2,
+      "dataTypeName": "TINYINT",
+      "length": 0,
+      "nullable": true
+    }
+  ],
+  "rows": [
+    [
+      1,
+      "SKU-001",
+      100,
+      9999999999,
+      29.99,
+      1.5,
+      4.567890123,
+      true,
+      32000,
+      255
+    ],
+    [
+      2,
+      "SKU-002",
+      0,
+      0,
+      0.01,
+      0.001,
+      1e-09,
+      false,
+      -32000,
+      0
+    ],
+    [
+      3,
+      "SKU-003",
+      -50,
+      -9999999999,
+      99999.99,
+      -1.5,
+      -4.567890123,
+      true,
+      0,
+      128
+    ],
+    [
+      4,
+      "SKU-004",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      5,
+      "SKU-005",
+      2147483647,
+      9223372036854775807,
+      12345678.9,
+      3.4028235e+38,
+      1.7976931348623157e+308,
+      true,
+      32767,
+      127
+    ]
+  ]
+}

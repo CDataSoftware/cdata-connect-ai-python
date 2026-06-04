@@ -1,0 +1,8 @@
+{
+  "schemas": [
+    {"name": "Salesforce", "catalog": "Salesforce1"},
+    {"name": "public", "catalog": "PostgreSQL_Prod"},
+    {"name": "analytics", "catalog": "MySQL_Analytics"},
+    {"name": "public", "catalog": "PostgreSQL2"}
+  ]
+}

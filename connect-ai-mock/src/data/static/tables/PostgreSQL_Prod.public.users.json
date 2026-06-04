@@ -1,0 +1,18 @@
+{
+  "catalog": "PostgreSQL_Prod",
+  "schema": "public",
+  "table": "users",
+  "columns": [
+    {"name": "id", "dataType": 2, "dataTypeName": "INT", "length": 11, "nullable": false},
+    {"name": "email", "dataType": 1, "dataTypeName": "STRING", "length": 255, "nullable": false},
+    {"name": "name", "dataType": 1, "dataTypeName": "STRING", "length": 255, "nullable": true},
+    {"name": "created_at", "dataType": 4, "dataTypeName": "DATETIME", "length": 0, "nullable": false}
+  ],
+  "rows": [
+    [1, "admin@example.com", "Admin User", "2024-01-01T00:00:00Z"],
+    [2, "john@example.com", "John Doe", "2024-01-15T10:30:00Z"],
+    [3, "jane@example.com", "Jane Smith", "2024-02-01T14:45:00Z"],
+    [4, "bob@example.com", "Bob Wilson", "2024-02-15T09:00:00Z"],
+    [5, "alice@example.com", "Alice Johnson", "2024-03-01T16:20:00Z"]
+  ]
+}

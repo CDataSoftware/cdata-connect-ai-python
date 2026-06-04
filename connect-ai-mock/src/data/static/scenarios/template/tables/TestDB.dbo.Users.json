@@ -1,0 +1,26 @@
+{
+  "catalog": "TestDB",
+  "schema": "dbo",
+  "table": "Users",
+  "columns": [
+    {"name": "id", "dataType": 2, "dataTypeName": "INT", "length": 0, "nullable": false},
+    {"name": "username", "dataType": 1, "dataTypeName": "STRING", "length": 100, "nullable": false},
+    {"name": "email", "dataType": 1, "dataTypeName": "STRING", "length": 255, "nullable": false},
+    {"name": "score", "dataType": 3, "dataTypeName": "DECIMAL", "length": 0, "nullable": true},
+    {"name": "is_active", "dataType": 5, "dataTypeName": "BOOLEAN", "length": 0, "nullable": true},
+    {"name": "created_at", "dataType": 4, "dataTypeName": "DATETIME", "length": 0, "nullable": true}
+  ],
+  "template": {
+    "row": [
+      "{{index}}",
+      "user_{{index}}",
+      "user{{index}}@{{domain}}",
+      "{{random_float:0:100}}",
+      "{{random_bool}}",
+      "{{random_datetime:2020-01-01:2024-12-31}}"
+    ],
+    "variables": {
+      "domain": ["example.com", "test.org", "acme.io", "company.net"]
+    }
+  }
+}

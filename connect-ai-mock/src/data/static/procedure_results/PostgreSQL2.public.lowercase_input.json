@@ -1,0 +1,17 @@
+{
+  "catalog": "PostgreSQL2",
+  "schema": "public",
+  "procedure": "lowercase_input",
+  "columns": [
+    {
+      "name": "result",
+      "dataType": 5,
+      "dataTypeName": "VARCHAR",
+      "length": 255,
+      "nullable": true
+    }
+  ],
+  "rows": [
+    ["foo"]
+  ]
+}

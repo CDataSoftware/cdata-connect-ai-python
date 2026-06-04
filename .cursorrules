@@ -1,0 +1,29 @@
+This is a Python DB-API 2.0 (PEP 249) connector for CData Connect AI.
+
+Key facts:
+- Package name: cdata-connect-ai. Source: connector/cdata_connect_ai/
+- Python >= 3.10. Dependencies: requests, ijson, pyhocon
+- DB-API 2.0: apilevel="2.0", threadsafety=3, paramstyle="pyformat"
+- HTTP REST client using requests + ijson streaming JSON parser
+- API endpoints: POST /api/query (SELECT), /api/batch (batch DML), /api/exec (stored procs)
+- Auth: Basic auth. Config via direct params or PyHOCON config file
+- Retry: Exponential backoff on 5xx, configurable max_retries/retry_delay
+- Thread-safe: threading.local() in Connection, threading.Lock() in Cursor
+
+Project structure:
+- connector/cdata_connect_ai/ — source code (connection.py, cursor.py, exceptions.py, util/types.py)
+- connector/tests/unit/ — 140 unit tests, no server needed, use mock_connection/mock_cursor fixtures
+- connector/tests/integration/ — 49 integration tests, mock server auto-starts on localhost:8080
+- connect-ai-mock/ — FastAPI mock server with scenario-based testing (scenarios.json)
+
+Testing:
+- Run from connector/ directory
+- pytest tests/unit/ -v (fast, no server)
+- pytest tests/integration/ -v (needs mock server)
+- Mock scenarios use PAT-based credentials (error_pat=401, server_error_pat=500, large_pat=large dataset)
+
+When writing code:
+- Follow PEP 249 exception hierarchy (exceptions.py)
+- Keep streaming architecture — rows come through ijson generators, not loaded into memory
+- Unit tests: never make HTTP calls, mock via unittest.mock
+- Integration tests: use con/cursor fixtures from tests/integration/conftest.py

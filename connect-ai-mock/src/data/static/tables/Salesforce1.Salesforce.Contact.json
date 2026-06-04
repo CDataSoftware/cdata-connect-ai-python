@@ -1,0 +1,25 @@
+{
+  "catalog": "Salesforce1",
+  "schema": "Salesforce",
+  "table": "Contact",
+  "columns": [
+    {"name": "Id", "dataType": 1, "dataTypeName": "STRING", "length": 18, "nullable": false},
+    {"name": "FirstName", "dataType": 1, "dataTypeName": "STRING", "length": 255, "nullable": true},
+    {"name": "LastName", "dataType": 1, "dataTypeName": "STRING", "length": 255, "nullable": false},
+    {"name": "Email", "dataType": 1, "dataTypeName": "STRING", "length": 255, "nullable": true},
+    {"name": "Phone", "dataType": 1, "dataTypeName": "STRING", "length": 40, "nullable": true},
+    {"name": "AccountId", "dataType": 1, "dataTypeName": "STRING", "length": 18, "nullable": true}
+  ],
+  "rows": [
+    ["003xx000004TmiUAAS", "John", "Doe", "john.doe@example.com", "555-0101", "001xx000003GYf5AAG"],
+    ["003xx000004TmiVAAS", "Jane", "Smith", "jane.smith@example.com", "555-0102", "001xx000003GYf5AAG"],
+    ["003xx000004TmiWAAS", "Bob", "Johnson", "bob.johnson@acme.com", "555-0103", "001xx000003GYf6AAG"],
+    ["003xx000004TmiXAAS", "Alice", "Williams", "alice.w@techcorp.com", "555-0104", "001xx000003GYf7AAG"],
+    ["003xx000004TmiYAAS", "Charlie", "Brown", "charlie.b@startup.io", "555-0105", "001xx000003GYf8AAG"],
+    ["003xx000004TmiZAAS", "Diana", "Prince", "diana@wonder.org", "555-0106", null],
+    ["003xx000004Tmj0AAS", "Edward", "Norton", "edward.n@movies.com", "555-0107", "001xx000003GYf9AAG"],
+    ["003xx000004Tmj1AAS", "Fiona", "Green", "fiona.g@nature.org", "555-0108", "001xx000003GYfAAAG"],
+    ["003xx000004Tmj2AAS", "George", "Wilson", "george.w@bigco.com", "555-0109", "001xx000003GYfBAAG"],
+    ["003xx000004Tmj3AAS", "Hannah", "Lee", "hannah.l@design.io", "555-0110", "001xx000003GYfCAAG"]
+  ]
+}

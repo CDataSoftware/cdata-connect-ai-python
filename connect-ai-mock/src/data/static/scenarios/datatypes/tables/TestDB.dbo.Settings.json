@@ -1,0 +1,140 @@
+{
+  "catalog": "TestDB",
+  "schema": "dbo",
+  "table": "Settings",
+  "columns": [
+    {
+      "name": "setting_id",
+      "dataType": 2,
+      "dataTypeName": "INT",
+      "length": 0,
+      "nullable": false
+    },
+    {
+      "name": "name",
+      "dataType": 1,
+      "dataTypeName": "STRING",
+      "length": 100,
+      "nullable": false
+    },
+    {
+      "name": "json_config",
+      "dataType": 1,
+      "dataTypeName": "JSON",
+      "length": 0,
+      "nullable": true
+    },
+    {
+      "name": "xml_data",
+      "dataType": 1,
+      "dataTypeName": "XML",
+      "length": 0,
+      "nullable": true
+    },
+    {
+      "name": "tags_array",
+      "dataType": 7,
+      "dataTypeName": "ARRAY",
+      "length": 0,
+      "nullable": true
+    },
+    {
+      "name": "status_enum",
+      "dataType": 1,
+      "dataTypeName": "ENUM",
+      "length": 0,
+      "nullable": true
+    },
+    {
+      "name": "ip_address",
+      "dataType": 1,
+      "dataTypeName": "INET",
+      "length": 0,
+      "nullable": true
+    },
+    {
+      "name": "mac_address",
+      "dataType": 1,
+      "dataTypeName": "MACADDR",
+      "length": 0,
+      "nullable": true
+    },
+    {
+      "name": "geo_point",
+      "dataType": 1,
+      "dataTypeName": "GEOGRAPHY",
+      "length": 0,
+      "nullable": true
+    }
+  ],
+  "rows": [
+    [
+      1,
+      "App Config",
+      "{\"theme\": \"dark\", \"language\": \"en\", \"notifications\": true}",
+      "<?xml version=\"1.0\"?><config><setting name=\"timeout\">30</setting></config>",
+      [
+        "tag1",
+        "tag2",
+        "tag3"
+      ],
+      "active",
+      "192.168.1.1",
+      "00:1A:2B:3C:4D:5E",
+      "POINT(-122.4194 37.7749)"
+    ],
+    [
+      2,
+      "User Prefs",
+      "{\"fontSize\": 14, \"colors\": [\"red\", \"blue\"]}",
+      "<preferences><pref key=\"sort\">asc</pref></preferences>",
+      [
+        "admin",
+        "user"
+      ],
+      "inactive",
+      "10.0.0.1",
+      "AA:BB:CC:DD:EE:FF",
+      "POINT(0 0)"
+    ],
+    [
+      3,
+      "Empty Config",
+      "{}",
+      "<empty/>",
+      [],
+      "pending",
+      "0.0.0.0",
+      "00:00:00:00:00:00",
+      null
+    ],
+    [
+      4,
+      "Null Config",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      5,
+      "Complex JSON",
+      "{\"nested\": {\"deep\": {\"value\": [1,2,3]}}, \"array\": [{\"a\":1},{\"b\":2}]}",
+      "<root><node attr=\"val\"><child>text</child></node></root>",
+      [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "active",
+      "255.255.255.255",
+      "FF:FF:FF:FF:FF:FF",
+      "POLYGON((0 0, 1 0, 1 1, 0 1, 0 0))"
+    ]
+  ]
+}

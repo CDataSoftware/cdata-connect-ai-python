@@ -1,0 +1,42 @@
+{
+  "catalog": "TestDB",
+  "schema": "dbo",
+  "table": "MixedTypes",
+  "columns": [
+    {"name": "id",            "dataType": 8,  "dataTypeName": "INT",       "length": 0,    "nullable": false},
+    {"name": "name",          "dataType": 5,  "dataTypeName": "STRING",    "length": 100,  "nullable": false},
+    {"name": "tiny_val",      "dataType": 6,  "dataTypeName": "TINYINT",   "length": 0,    "nullable": true},
+    {"name": "small_val",     "dataType": 7,  "dataTypeName": "SMALLINT",  "length": 0,    "nullable": true},
+    {"name": "big_val",       "dataType": 9,  "dataTypeName": "BIGINT",    "length": 0,    "nullable": true},
+    {"name": "float_val",     "dataType": 10, "dataTypeName": "FLOAT",     "length": 0,    "nullable": true},
+    {"name": "double_val",    "dataType": 11, "dataTypeName": "DOUBLE",    "length": 0,    "nullable": true},
+    {"name": "decimal_val",   "dataType": 12, "dataTypeName": "DECIMAL",   "length": 0,    "nullable": true},
+    {"name": "bool_val",      "dataType": 14, "dataTypeName": "BOOLEAN",   "length": 0,    "nullable": true},
+    {"name": "date_val",      "dataType": 15, "dataTypeName": "DATE",      "length": 0,    "nullable": true},
+    {"name": "time_val",      "dataType": 16, "dataTypeName": "TIME",      "length": 0,    "nullable": true},
+    {"name": "timestamp_val", "dataType": 17, "dataTypeName": "DATETIME",  "length": 0,    "nullable": true},
+    {"name": "uuid_val",      "dataType": 18, "dataTypeName": "UUID",      "length": 36,   "nullable": true},
+    {"name": "text_val",      "dataType": 5,  "dataTypeName": "STRING",    "length": 1000, "nullable": true}
+  ],
+  "template": {
+    "row": [
+      "{{index}}",
+      "item_{{index}}",
+      "{{random_int:0:255}}",
+      "{{random_int:0:32767}}",
+      "{{random_int:100000:9999999999}}",
+      "{{random_float:0:1000}}",
+      "{{random_float:0:999999}}",
+      "{{random_float:0:99999}}",
+      "{{random_bool}}",
+      "{{random_date:2020-01-01:2024-12-31}}",
+      "{{random_time}}",
+      "{{random_datetime:2020-01-01:2024-12-31}}",
+      "{{uuid}}",
+      "description_for_item_{{index}}_with_{{domain}}"
+    ],
+    "variables": {
+      "domain": ["example.com", "test.org", "acme.io", "company.net", "data.dev"]
+    }
+  }
+}

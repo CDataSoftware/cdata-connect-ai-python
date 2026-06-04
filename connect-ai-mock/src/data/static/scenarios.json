@@ -1,0 +1,270 @@
+{
+  "scenarios": {
+    "default": {
+      "description": "Default scenario - returns standard mock data",
+      "delayMs": 0
+    },
+    "happy_path": {
+      "description": "Success scenario with full data",
+      "delayMs": 0
+    },
+    "error_auth": {
+      "description": "Returns authentication errors",
+      "error": {
+        "code": 401,
+        "message": "Invalid credentials"
+      }
+    },
+    "error_not_found": {
+      "description": "Returns not found errors for queries",
+      "error": {
+        "code": 404,
+        "message": "Resource not found"
+      }
+    },
+    "error_server": {
+      "description": "Returns internal server errors",
+      "error": {
+        "code": 500,
+        "message": "Internal server error"
+      }
+    },
+    "slow_response": {
+      "description": "Adds 2 second delay to all responses",
+      "delayMs": 2000
+    },
+    "very_slow": {
+      "description": "Adds 5 second delay to all responses",
+      "delayMs": 5000
+    },
+    "empty_data": {
+      "description": "Returns empty result sets",
+      "emptyResults": true
+    },
+    "large_dataset": {
+      "description": "Returns large datasets for performance testing",
+      "dataDir": "large"
+    },
+    "datatypes": {
+      "description": "Returns data with various SQL data types for type handling testing",
+      "dataDir": "datatypes"
+    },
+    "template_stream": {
+      "description": "Template-based data generation with configurable rows and pause patterns",
+      "dataDir": "template",
+      "rowCount": 100,
+      "pauseAfterRows": 25,
+      "pausePattern": ["100ms", "500ms", "100ms"]
+    },
+    "template_large": {
+      "description": "Large template dataset with 1000 rows",
+      "dataDir": "template",
+      "rowCount": 1000,
+      "pauseAfterRows": 200,
+      "pausePattern": ["50ms", "100ms", "50ms"]
+    },
+    "template_slow": {
+      "description": "Slow streaming with long pauses",
+      "dataDir": "template",
+      "rowCount": 50,
+      "pauseAfterRows": 10,
+      "pausePattern": ["1s", "2s", "1s"]
+    },
+    "template_million": {
+      "description": "1 million records with 20ms pause between pages of 1000",
+      "dataDir": "template",
+      "rowCount": 1000000,
+      "pauseAfterRows": 1000,
+      "pausePattern": ["20ms"]
+    },
+    "template_partial_error": {
+      "description": "Returns 50 rows then includes an error (simulates connection timeout)",
+      "dataDir": "template",
+      "rowCount": 50,
+      "partialError": {
+        "code": 504,
+        "message": "Connection timeout after 50 rows"
+      }
+    },
+    "template_partial_500": {
+      "description": "Returns 100 rows then includes a server error",
+      "dataDir": "template",
+      "rowCount": 100,
+      "partialError": {
+        "code": 500,
+        "message": "Internal server error: query execution interrupted"
+      }
+    },
+    "template_all_features": {
+      "description": "Template rows + pauses + partial error combined",
+      "dataDir": "template",
+      "rowCount": 100,
+      "pauseAfterRows": 25,
+      "pausePattern": ["200ms", "500ms"],
+      "partialError": {
+        "code": 504,
+        "message": "Gateway timeout after 100 rows"
+      }
+    },
+    "truncated_response": {
+      "description": "Server crash - returns truncated/malformed JSON after 10 rows",
+      "dataDir": "template",
+      "rowCount": 100,
+      "truncateAfterRows": 10
+    },
+    "truncated_mid_stream": {
+      "description": "Server crash mid-stream - truncates after 50 rows with pauses",
+      "dataDir": "template",
+      "rowCount": 200,
+      "pauseAfterRows": 25,
+      "pausePattern": ["100ms"],
+      "truncateAfterRows": 50
+    },
+
+    "perf_100": {
+      "description": "Performance: 100 rows, no pauses — baseline throughput",
+      "dataDir": "template",
+      "rowCount": 100
+    },
+    "perf_1k": {
+      "description": "Performance: 1,000 rows, no pauses — medium throughput",
+      "dataDir": "template",
+      "rowCount": 1000
+    },
+    "perf_10k": {
+      "description": "Performance: 10,000 rows, no pauses — large throughput",
+      "dataDir": "template",
+      "rowCount": 10000
+    },
+    "perf_50k": {
+      "description": "Performance: 50,000 rows, no pauses — stress throughput",
+      "dataDir": "template",
+      "rowCount": 50000
+    },
+    "perf_mixed_types": {
+      "description": "Performance: 1,000 rows with all column types — type conversion cost",
+      "dataDir": "template_mixed_types",
+      "rowCount": 1000
+    },
+    "perf_long_stream": {
+      "description": "Performance: 600 rows, 1s pause per row — ~10 min long-running stream",
+      "dataDir": "template",
+      "rowCount": 600,
+      "pauseAfterRows": 1,
+      "pausePattern": ["1s"]
+    },
+    "perf_jittery": {
+      "description": "Performance: 1,000 rows with simulated network jitter pauses",
+      "dataDir": "template",
+      "rowCount": 1000,
+      "pauseAfterRows": 50,
+      "pausePattern": ["50ms", "200ms", "1s", "50ms"]
+    },
+    "perf_500k": {
+      "description": "Performance: 500,000 rows, no pauses — near-million row stress test",
+      "dataDir": "template",
+      "rowCount": 500000
+    },
+    "perf_soak_slow_server": {
+      "description": "Soak: 5,000 rows, server sends 1 row then pauses 500ms — ~42 min sustained slow drip",
+      "dataDir": "template",
+      "rowCount": 5000,
+      "pauseAfterRows": 1,
+      "pausePattern": ["500ms"]
+    },
+    "perf_soak_medium": {
+      "description": "Soak: 10,000 rows, 100ms pause every 10 rows — ~17 min steady stream",
+      "dataDir": "template",
+      "rowCount": 10000,
+      "pauseAfterRows": 10,
+      "pausePattern": ["100ms"]
+    },
+    "perf_chunk_gap_35s": {
+      "description": "Timeout probe: 100 rows, 35s pause every 10 rows — will exceed default 30s read timeout mid-stream",
+      "dataDir": "template",
+      "rowCount": 100,
+      "pauseAfterRows": 10,
+      "pausePattern": ["35s"]
+    },
+    "perf_chunk_gap_25s": {
+      "description": "Timeout probe: 100 rows, 25s pause every 10 rows — just under default 30s read timeout",
+      "dataDir": "template",
+      "rowCount": 100,
+      "pauseAfterRows": 10,
+      "pausePattern": ["25s"]
+    },
+    "perf_soak_1h_drip": {
+      "description": "Soak 1h: 3,600 rows, 1 row/sec — steady drip for exactly 1 hour",
+      "dataDir": "template",
+      "rowCount": 3600,
+      "pauseAfterRows": 1,
+      "pausePattern": ["1s"]
+    },
+    "perf_soak_1h_burst": {
+      "description": "Soak 1h: 36,000 rows in bursts of 100, then 10s pause — ~1 hour with bursty traffic",
+      "dataDir": "template",
+      "rowCount": 36000,
+      "pauseAfterRows": 100,
+      "pausePattern": ["10s"]
+    },
+    "perf_soak_1h_mixed": {
+      "description": "Soak 1h: 3,600 mixed-type rows, 1 row/sec — type conversion under sustained load",
+      "dataDir": "template_mixed_types",
+      "rowCount": 3600,
+      "pauseAfterRows": 1,
+      "pausePattern": ["1s"]
+    },
+    "perf_soak_1h_firehose": {
+      "description": "Soak 1h: 360,000 rows with 10ms pause per row — sustained high-volume streaming for ~1 hour",
+      "dataDir": "template",
+      "rowCount": 360000,
+      "pauseAfterRows": 1,
+      "pausePattern": ["10ms"]
+    },
+    "perf_soak_1h_firehose_mixed": {
+      "description": "Soak 1h: 360,000 mixed-type rows with 10ms pause per row — heavy type conversion under volume",
+      "dataDir": "template_mixed_types",
+      "rowCount": 360000,
+      "pauseAfterRows": 1,
+      "pausePattern": ["10ms"]
+    }
+  },
+  "credentials": {
+    "test@example.com:happy_pat": "happy_path",
+    "test@example.com:error_pat": "error_auth",
+    "test@example.com:notfound_pat": "error_not_found",
+    "test@example.com:server_error_pat": "error_server",
+    "test@example.com:slow_pat": "slow_response",
+    "test@example.com:very_slow_pat": "very_slow",
+    "test@example.com:empty_pat": "empty_data",
+    "test@example.com:large_pat": "large_dataset",
+    "test@example.com:datatypes_pat": "datatypes",
+    "test@example.com:template_pat": "template_stream",
+    "test@example.com:template_large_pat": "template_large",
+    "test@example.com:template_slow_pat": "template_slow",
+    "test@example.com:million_pat": "template_million",
+    "test@example.com:partial_error_pat": "template_partial_error",
+    "test@example.com:partial_500_pat": "template_partial_500",
+    "test@example.com:all_features_pat": "template_all_features",
+    "test@example.com:truncate_pat": "truncated_response",
+    "test@example.com:crash_pat": "truncated_mid_stream",
+
+    "test@example.com:perf_100_pat": "perf_100",
+    "test@example.com:perf_1k_pat": "perf_1k",
+    "test@example.com:perf_10k_pat": "perf_10k",
+    "test@example.com:perf_50k_pat": "perf_50k",
+    "test@example.com:perf_types_pat": "perf_mixed_types",
+    "test@example.com:perf_long_pat": "perf_long_stream",
+    "test@example.com:perf_jittery_pat": "perf_jittery",
+    "test@example.com:perf_500k_pat": "perf_500k",
+    "test@example.com:perf_soak_slow_pat": "perf_soak_slow_server",
+    "test@example.com:perf_soak_medium_pat": "perf_soak_medium",
+    "test@example.com:perf_chunk_gap_35s_pat": "perf_chunk_gap_35s",
+    "test@example.com:perf_chunk_gap_25s_pat": "perf_chunk_gap_25s",
+    "test@example.com:perf_soak_1h_drip_pat": "perf_soak_1h_drip",
+    "test@example.com:perf_soak_1h_burst_pat": "perf_soak_1h_burst",
+    "test@example.com:perf_soak_1h_mixed_pat": "perf_soak_1h_mixed",
+    "test@example.com:perf_soak_1h_firehose_pat": "perf_soak_1h_firehose",
+    "test@example.com:perf_soak_1h_firehose_mixed_pat": "perf_soak_1h_firehose_mixed"
+  }
+}
