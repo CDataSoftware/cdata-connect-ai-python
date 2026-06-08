@@ -1,0 +1,72 @@
+# Public-PR validation for cdata-connect-ai-python (DEVOPS-3218).
+# Unit + mock tests only — no live tests, no overlay. Microsoft-hosted agents.
+
+trigger: none
+
+pr:
+  autoCancel: true
+
+variables:
+  connectorDir: '$(Build.SourcesDirectory)/connector'
+  mockDir: '$(Build.SourcesDirectory)/connect-ai-mock'
+
+jobs:
+  - job: validate
+    displayName: 'Unit + mock validation'
+    pool:
+      vmImage: ubuntu-latest
+    strategy:
+      maxParallel: 3
+      matrix:
+        Python310:
+          pythonVersion: '3.10'
+        Python311:
+          pythonVersion: '3.11'
+        Python312:
+          pythonVersion: '3.12'
+    steps:
+      - checkout: self
+        fetchDepth: 1
+
+      - task: UsePythonVersion@0
+        displayName: 'Use Python $(pythonVersion)'
+        inputs:
+          versionSpec: '$(pythonVersion)'
+          addToPath: true
+
+      - bash: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
+        displayName: 'Install connector (dev extras)'
+        workingDirectory: $(connectorDir)
+
+      - bash: |
+          python -m pip install -r requirements.txt
+        displayName: 'Install mock server dependencies'
+        workingDirectory: $(mockDir)
+
+      - bash: |
+          pytest tests/unit/ -v \
+            --junit-xml=$(Build.ArtifactStagingDirectory)/unit-results.xml
+        displayName: 'Unit tests'
+        workingDirectory: $(connectorDir)
+
+      - bash: |
+          pytest tests/integration/ -v --skip-slow \
+            --junit-xml=$(Build.ArtifactStagingDirectory)/mock-results.xml
+        displayName: 'Mock integration tests'
+        workingDirectory: $(connectorDir)
+        env:
+          CDATA_BASE_URL: http://localhost:8080/api
+          CDATA_USERNAME: test@example.com
+          CDATA_PASSWORD: any_token
+          MOCK_SERVER_DIR: $(mockDir)
+
+      - task: PublishTestResults@2
+        displayName: 'Publish test results'
+        condition: always()
+        inputs:
+          testResultsFormat: JUnit
+          testResultsFiles: '*-results.xml'
+          searchFolder: $(Build.ArtifactStagingDirectory)
+          testRunTitle: 'Public PR Validation (Python $(pythonVersion))'
