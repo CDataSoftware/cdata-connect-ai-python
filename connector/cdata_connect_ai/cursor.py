@@ -18,6 +18,8 @@ from .util.types import (
 
 _PYFORMAT_RE = re.compile(r'%\(([^)]+)\)s')
 
+USER_AGENT = "CData Python Driver for CData Connect"
+
 
 class Cursor:
     """
@@ -85,6 +87,7 @@ class Cursor:
                 self.response = requests.post(
                     url,
                     auth=self.connection.auth,
+                    headers={"User-Agent": USER_AGENT},
                     json=json_object,
                     stream=True,
                     timeout=timeout,
