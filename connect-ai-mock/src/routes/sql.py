@@ -15,7 +15,8 @@ from src.data import get_store
 from src.middleware import get_auth_credentials
 from src.models import QueryResult, QueryRequest, BatchRequest, ExecRequest, ColumnInfo, ResultSet
 
-router = APIRouter(prefix="/api", tags=["SQL API"])
+# Mounted in main.py under /api, /api/v2 and /api/v2/workspaces/{workspaceId}
+router = APIRouter(tags=["SQL API"])
 
 
 def generate_template_value(template_str: str, index: int, variables: dict):

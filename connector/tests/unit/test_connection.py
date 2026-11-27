@@ -81,21 +81,14 @@ class TestConnectionInit:
         with pytest.raises(ConfigurationError):
             Connection(config_path="/nonexistent/config.conf")
 
-    def test_workspace_stored(self):
-        conn = Connection(
-            base_url="http://localhost/api",
-            username="user",
-            password="pass",
-            workspace="ws1",
-        )
-        assert conn.workspace == "ws1"
-
     def test_workspace_default_none(self):
         conn = Connection(
             base_url="http://localhost/api",
             username="user",
             password="pass",
         )
+        assert conn.workspace_id is None
+        assert conn.virtual_schema is None
         assert conn.workspace is None
 
     def test_timeout_default(self):
@@ -273,3 +266,110 @@ class TestExceptionAttributes:
         warnings.simplefilter("ignore")
         assert conn.NotSupportedError is NotSupportedError
         warnings.resetwarnings()
+
+
+WORKSPACE_ID = "2f5ae96c-b558-4c7b-a3fb-92c9dd5a9d10"
+
+
+def _conn(**kwargs):
+    return Connection(base_url="http://localhost/api", username="user",
+                      password="pass", **kwargs)
+
+
+class TestWorkspaceId:
+    def test_workspace_id_stored(self):
+        assert _conn(workspaceId=WORKSPACE_ID).workspace_id == WORKSPACE_ID
+
+    def test_workspace_id_normalized_to_canonical_form(self):
+        conn = _conn(workspaceId="{2F5AE96C-B558-4C7B-A3FB-92C9DD5A9D10}")
+        assert conn.workspace_id == WORKSPACE_ID
+
+    @pytest.mark.parametrize("bad", ["Production", "", "2f5ae96c-b558", "not-a-guid"])
+    def test_workspace_id_not_a_guid_raises(self, bad):
+        with pytest.raises(ConfigurationError, match="workspaceId"):
+            _conn(workspaceId=bad)
+
+
+class TestVirtualSchema:
+    def test_virtual_schema_stored(self):
+        conn = _conn(virtualSchema="SalesData")
+        assert conn.virtual_schema == "SalesData"
+        assert conn.workspace == "SalesData"
+
+    def test_virtual_schema_does_not_warn(self):
+        with warnings.catch_warnings():
+            warnings.simplefilter("error")
+            _conn(virtualSchema="SalesData")
+
+    def test_workspace_alias_sets_virtual_schema(self):
+        with pytest.warns(DeprecationWarning, match="virtualSchema"):
+            conn = _conn(workspace="ws1")
+        assert conn.virtual_schema == "ws1"
+        assert conn.workspace == "ws1"
+
+    def test_workspace_and_virtual_schema_same_value_allowed(self):
+        with pytest.warns(DeprecationWarning):
+            conn = _conn(workspace="ws1", virtualSchema="ws1")
+        assert conn.virtual_schema == "ws1"
+
+    def test_workspace_and_virtual_schema_conflict_raises(self):
+        with pytest.raises(ConfigurationError, match="Conflicting"):
+            _conn(workspace="ws1", virtualSchema="ws2")
+
+    def test_workspace_id_and_virtual_schema_together(self):
+        conn = _conn(workspaceId=WORKSPACE_ID, virtualSchema="SalesData")
+        assert conn.workspace_id == WORKSPACE_ID
+        assert conn.virtual_schema == "SalesData"
+
+
+def _config_conn(values, **kwargs):
+    values = {"cdata_api_db.username": "u", "cdata_api_db.password": "p", **values}
+    mock_config = MagicMock()
+    mock_config.get_string.side_effect = lambda key: values[key]
+    with patch("cdata_connect_ai.connection.ConfigFactory.parse_file",
+               return_value=mock_config):
+        return Connection(config_path="/fake/config.conf", **kwargs)
+
+
+class TestWorkspaceConfigFile:
+    def test_config_without_workspace_keys(self):
+        conn = _config_conn({})
+        assert conn.workspace_id is None
+        assert conn.virtual_schema is None
+
+    def test_config_workspace_id_and_virtual_schema(self):
+        conn = _config_conn({
+            "cdata_api_db.workspaceId": WORKSPACE_ID,
+            "cdata_api_db.virtualSchema": "SalesData",
+        })
+        assert conn.workspace_id == WORKSPACE_ID
+        assert conn.virtual_schema == "SalesData"
+
+    def test_config_workspace_alias_warns(self):
+        with pytest.warns(DeprecationWarning):
+            conn = _config_conn({"cdata_api_db.workspace": "ws1"})
+        assert conn.virtual_schema == "ws1"
+
+    def test_config_workspace_conflict_raises(self):
+        with pytest.raises(ConfigurationError, match="Conflicting"):
+            _config_conn({
+                "cdata_api_db.workspace": "ws1",
+                "cdata_api_db.virtualSchema": "ws2",
+            })
+
+    def test_config_invalid_workspace_id_raises(self):
+        with pytest.raises(ConfigurationError, match="workspaceId"):
+            _config_conn({"cdata_api_db.workspaceId": "Production"})
+
+    def test_arguments_override_config(self):
+        other_id = "11111111-2222-3333-4444-555555555555"
+        conn = _config_conn(
+            {
+                "cdata_api_db.workspaceId": WORKSPACE_ID,
+                "cdata_api_db.workspace": "from_config",
+            },
+            workspaceId=other_id,
+            virtualSchema="from_args",
+        )
+        assert conn.workspace_id == other_id
+        assert conn.virtual_schema == "from_args"

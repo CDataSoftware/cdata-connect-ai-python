@@ -18,7 +18,8 @@ def mock_connection():
     conn.is_open = True
     conn.base_url = "http://mock-server/api"
     conn.auth = ("user", "pass")
-    conn.workspace = None
+    conn.workspace_id = None
+    conn.virtual_schema = None
     conn.timeout = 30
     conn.max_retries = 3
     conn.retry_delay = 1.0

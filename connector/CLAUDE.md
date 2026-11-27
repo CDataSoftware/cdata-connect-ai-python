@@ -19,7 +19,7 @@ cdata_connect_ai/
 
 1. `connect()` → creates a `Connection` (validates params or reads PyHOCON config)
 2. `Connection.cursor()` → creates a `Cursor` (holds reference to Connection for auth/base_url)
-3. `Cursor.execute(query)` → `_execute_request()` → HTTP POST to `/api/query` with retry
+3. `Cursor.execute(query)` → `_execute_request()` → HTTP POST to `/api/query` (or `/api/v2/workspaces/{workspaceId}/query` when `workspaceId` is set; see `Cursor._build_url()`) with retry
 4. Response is streamed: `ijson.parse()` extracts schema, then `ijson.items()` yields rows lazily
 5. `fetchone()`/`fetchall()`/`fetchmany()` consume from the row generator
 

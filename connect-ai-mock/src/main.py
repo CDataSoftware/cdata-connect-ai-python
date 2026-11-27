@@ -10,11 +10,12 @@ import asyncio
 import base64
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, Request
+from fastapi import Depends, FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import Response
 
 from src.data import init_store, get_store
+from src.middleware import validate_workspace_id, validate_virtual_schema
 from src.routes import metadata_router, sql_router
 
 
@@ -98,9 +99,18 @@ async def add_delay(request: Request, call_next):
     return response
 
 
-# Include routers
-app.include_router(metadata_router)
-app.include_router(sql_router)
+# Include routers: legacy /api, plus the v2 routes with and without a workspace segment
+for prefix, dependencies in (
+    ("/api", []),
+    ("/api/v2", []),
+    ("/api/v2/workspaces/{workspaceId}", [Depends(validate_workspace_id)]),
+):
+    for router in (metadata_router, sql_router):
+        app.include_router(
+            router,
+            prefix=prefix,
+            dependencies=dependencies + [Depends(validate_virtual_schema)],
+        )
 
 
 @app.get("/")

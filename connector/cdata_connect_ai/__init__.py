@@ -51,6 +51,8 @@ def connect(
     timeout: int = 90,
     max_retries: int = 3,
     retry_delay: float = 1.0,
+    workspaceId: Optional[str] = None,
+    virtualSchema: Optional[str] = None,
 ) -> Connection:
     """
     Create a connection to the CData Connect AI API.
@@ -59,10 +61,12 @@ def connect(
     :param username: The username for authentication.
     :param password: The password for authentication.
     :param config_path: Optional path to a pyhocon config file.
-    :param workspace: Optional workspace name to append as a query parameter.
+    :param workspace: Deprecated alias for virtualSchema.
     :param timeout: HTTP request timeout in seconds (per socket read). Default 90.
     :param max_retries: Retry count for transient 5xx errors. Default 3.
     :param retry_delay: Base seconds between retries (exponential backoff). Default 1.0.
+    :param workspaceId: Optional workspace GUID. Omitted = the account's default workspace.
+    :param virtualSchema: Optional virtual schema name, sent as ``?virtualSchema=``.
     :return: A Connection object.
     """
     if not config_path and not (username and password):
@@ -79,4 +83,6 @@ def connect(
         timeout=timeout,
         max_retries=max_retries,
         retry_delay=retry_delay,
+        workspaceId=workspaceId,
+        virtualSchema=virtualSchema,
     )

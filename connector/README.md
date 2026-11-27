@@ -44,8 +44,13 @@ Use a [PyHOCON](https://github.com/chimpler/pyhocon) config file to keep credent
 cdata_api_db {
   username = "you@example.com"
   password = "<your_personal_access_token>"
+  # Optional:
+  # workspaceId = "2f5ae96c-b558-4c7b-a3fb-92c9dd5a9d10"
+  # virtualSchema = "SalesData"
 }
 ```
+
+Arguments passed to `connect()` take precedence over the config file.
 
 ```python
 conn = cdata_connect_ai.connect(config_path="config.conf")
@@ -87,7 +92,9 @@ rows = cursor.fetchall()
 | `username` | Authentication username | — |
 | `password` | Personal access token | — |
 | `config_path` | Path to PyHOCON config file | — |
-| `workspace` | Connect AI workspace name | — |
+| `workspaceId` | Workspace GUID. Omit to use the account's default workspace | — |
+| `virtualSchema` | Virtual schema name | — |
+| `workspace` | **Deprecated** alias for `virtualSchema` (emits a `DeprecationWarning`) | — |
 | `timeout` | HTTP request timeout (seconds) | `90` |
 | `max_retries` | Retries on transient 5xx errors | `3` |
 | `retry_delay` | Base delay between retries (seconds) | `1.0` |
