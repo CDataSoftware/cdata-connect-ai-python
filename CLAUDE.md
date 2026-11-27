@@ -35,7 +35,8 @@ connect-ai-python/
 - **DB-API 2.0**: `apilevel="2.0"`, `threadsafety=1`, `paramstyle="pyformat"`
 - **HTTP client**: Uses `requests` for HTTP, `ijson` for streaming JSON parsing
 - **Auth**: Basic auth (username:password), also supports PyHOCON config files
-- **API endpoints**: POST `/api/query` (SELECT), `/api/batch` (INSERT/UPDATE/DELETE), `/api/exec` (stored procs)
+- **API endpoints**: POST `/api/query` (SELECT), `/api/batch` (INSERT/UPDATE/DELETE), `/api/exec` (stored procs). With `workspaceId` set, these become `/api/v2/workspaces/{workspaceId}/...`
+- **Workspace vs virtual schema**: `workspaceId` (GUID) is the workspace; `virtualSchema` (sent as `?virtualSchema=`) is the virtual schema. The `workspace=` keyword is a deprecated alias for `virtualSchema`, not the workspace
 - **Retry**: Exponential backoff on 5xx errors, configurable `max_retries`/`retry_delay`
 - **Thread-safe**: Uses `threading.local()` for connection state, `threading.Lock()` in cursor
 - **Python**: >= 3.10

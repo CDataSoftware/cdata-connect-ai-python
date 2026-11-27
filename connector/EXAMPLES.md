@@ -155,24 +155,35 @@ Keep credentials out of code using a [PyHOCON](https://github.com/chimpler/pyhoc
 cdata_api_db {
     username = "you@example.com"
     password = "<your_personal_access_token>"
+    # Optional:
+    # workspaceId = "2f5ae96c-b558-4c7b-a3fb-92c9dd5a9d10"
+    # virtualSchema = "SalesData"
 }
 ```
+
+Arguments passed to `connect()` take precedence over the config file.
 
 ```python
 conn = cdata_connect_ai.connect(config_path="config.conf")
 ```
 
-## Workspaces
+## Workspaces and Virtual Schemas
 
-Access a specific CData Connect AI workspace:
+Select a workspace by its GUID with `workspaceId`, and a virtual schema by name with `virtualSchema`:
 
 ```python
 conn = cdata_connect_ai.connect(
     username="you@example.com",
     password="<your_pat>",
-    workspace="production",
+    workspaceId="2f5ae96c-b558-4c7b-a3fb-92c9dd5a9d10",  # omit to use the default workspace
+    virtualSchema="SalesData",
 )
 ```
+
+- `workspaceId` takes the workspace's GUID, not its display name, so renaming a workspace does not break scripts. A value that is not a GUID raises `ConfigurationError`.
+- The workspace is fixed for the life of the connection. To query two workspaces, open two connections.
+- The personal access token is account-wide; it is not tied to a workspace.
+- `workspace=` is a deprecated alias for `virtualSchema` and emits a `DeprecationWarning`. Passing both with different values raises `ConfigurationError`.
 
 ## Connection Options
 

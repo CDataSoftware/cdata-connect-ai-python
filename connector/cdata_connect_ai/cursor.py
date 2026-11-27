@@ -186,10 +186,15 @@ class Cursor:
         ]
 
     def _build_url(self, endpoint: str) -> str:
-        """Build API URL with optional workspace query parameter."""
-        url = f"{self.connection.base_url}/{endpoint}"
-        if self.connection.workspace:
-            url += f"?workspace={quote(self.connection.workspace)}"
+        """Build API URL, scoped to the workspace and virtual schema if set."""
+        base_url = self.connection.base_url
+        if self.connection.workspace_id:
+            url = (f"{base_url}/v2/workspaces/"
+                   f"{quote(self.connection.workspace_id, safe='')}/{endpoint}")
+        else:
+            url = f"{base_url}/{endpoint}"
+        if self.connection.virtual_schema:
+            url += f"?virtualSchema={quote(self.connection.virtual_schema, safe='')}"
         return url
 
     # ------------------------------------------------------------------

@@ -234,3 +234,51 @@ class TestDescriptionColumnLabel:
         ]
         names = [col[0] for col in cur.description]
         assert names == ["OppId", "AcctId"]
+
+
+class TestBuildUrl:
+    WORKSPACE_ID = "2f5ae96c-b558-4c7b-a3fb-92c9dd5a9d10"
+
+    def test_no_workspace_uses_legacy_route(self, mock_cursor):
+        assert mock_cursor._build_url("query") == "http://mock-server/api/query"
+
+    def test_workspace_id_uses_v2_workspace_route(self, mock_cursor):
+        mock_cursor.connection.workspace_id = self.WORKSPACE_ID
+        assert mock_cursor._build_url("query") == (
+            f"http://mock-server/api/v2/workspaces/{self.WORKSPACE_ID}/query"
+        )
+
+    def test_virtual_schema_on_legacy_route(self, mock_cursor):
+        mock_cursor.connection.virtual_schema = "SalesData"
+        assert mock_cursor._build_url("batch") == (
+            "http://mock-server/api/batch?virtualSchema=SalesData"
+        )
+
+    def test_workspace_id_and_virtual_schema(self, mock_cursor):
+        mock_cursor.connection.workspace_id = self.WORKSPACE_ID
+        mock_cursor.connection.virtual_schema = "SalesData"
+        assert mock_cursor._build_url("exec") == (
+            f"http://mock-server/api/v2/workspaces/{self.WORKSPACE_ID}/exec"
+            f"?virtualSchema=SalesData"
+        )
+
+    def test_virtual_schema_is_url_encoded(self, mock_cursor):
+        mock_cursor.connection.virtual_schema = "Sales Data/EU&US"
+        assert mock_cursor._build_url("query") == (
+            "http://mock-server/api/query?virtualSchema=Sales%20Data%2FEU%26US"
+        )
+
+    @pytest.mark.parametrize("method, args, endpoint", [
+        ("execute", ("SELECT 1",), "query"),
+        ("executemany", ("INSERT INTO t VALUES (@a)", [{"@a": 1}]), "batch"),
+        ("callproc", ("proc", ()), "exec"),
+    ])
+    def test_each_call_uses_workspace_url(self, mock_cursor, method, args, endpoint):
+        mock_cursor.connection.workspace_id = self.WORKSPACE_ID
+        mock_cursor.connection.virtual_schema = "SalesData"
+        getattr(mock_cursor, method)(*args)
+        url = mock_cursor._execute_request.call_args[0][0]
+        assert url == (
+            f"http://mock-server/api/v2/workspaces/{self.WORKSPACE_ID}/{endpoint}"
+            f"?virtualSchema=SalesData"
+        )

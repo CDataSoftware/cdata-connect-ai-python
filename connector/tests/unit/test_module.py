@@ -51,14 +51,38 @@ class TestConnect:
             cdata_connect_ai.connect(base_url="http://localhost/api", username="user")
 
     def test_connect_with_workspace(self):
+        with pytest.warns(DeprecationWarning):
+            conn = cdata_connect_ai.connect(
+                base_url="http://localhost/api",
+                username="user",
+                password="pass",
+                workspace="my_workspace",
+            )
+        assert conn.workspace == "my_workspace"
+        assert conn.virtual_schema == "my_workspace"
+        conn.close()
+
+    def test_connect_with_workspace_id_and_virtual_schema(self):
         conn = cdata_connect_ai.connect(
             base_url="http://localhost/api",
             username="user",
             password="pass",
-            workspace="my_workspace",
+            workspaceId="2f5ae96c-b558-4c7b-a3fb-92c9dd5a9d10",
+            virtualSchema="SalesData",
         )
-        assert conn.workspace == "my_workspace"
+        assert conn.workspace_id == "2f5ae96c-b558-4c7b-a3fb-92c9dd5a9d10"
+        assert conn.virtual_schema == "SalesData"
         conn.close()
+
+    def test_connect_workspace_alias_warning_points_at_caller(self):
+        with pytest.warns(DeprecationWarning) as record:
+            cdata_connect_ai.connect(
+                base_url="http://localhost/api",
+                username="user",
+                password="pass",
+                workspace="my_workspace",
+            )
+        assert record[0].filename == __file__
 
     def test_connect_with_config_path_missing_file(self):
         from cdata_connect_ai.exceptions import ConfigurationError

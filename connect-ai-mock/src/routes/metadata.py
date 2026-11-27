@@ -9,7 +9,8 @@ from src.data import get_store
 from src.middleware import get_auth_credentials
 from src.models import QueryResult
 
-router = APIRouter(prefix="/api", tags=["Metadata API"])
+# Mounted in main.py under /api, /api/v2 and /api/v2/workspaces/{workspaceId}
+router = APIRouter(tags=["Metadata API"])
 
 
 @router.get("/catalogs", response_model=QueryResult)

@@ -94,6 +94,11 @@ Use `test@example.com` as the username and the PAT token below to trigger differ
 | `GET` | `/api/exportedKeys` | List exported keys |
 | `GET` | `/api/importedKeys` | List imported keys |
 
+All SQL and Metadata routes are also served under `/api/v2/...` and
+`/api/v2/workspaces/{workspaceId}/...` (`workspaceId` must be a GUID, otherwise 400).
+Every route accepts `?virtualSchema=` and its deprecated alias `?workspace=`;
+sending both with different values returns 400.
+
 ### Utility
 | Method | Path | Description |
 |--------|------|-------------|
